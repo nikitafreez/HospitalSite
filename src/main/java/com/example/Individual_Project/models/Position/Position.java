@@ -1,6 +1,6 @@
 package com.example.Individual_Project.models.Position;
 
-import com.example.Individual_Project.models.Peoples.Worker;
+import com.example.Individual_Project.models.People.Worker;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

@@ -1,16 +1,17 @@
-package com.example.Individual_Project.models.Peoples;
+package com.example.Individual_Project.models.People;
 
 import com.example.Individual_Project.models.Documents.OMS;
 import com.example.Individual_Project.models.Documents.Passport;
-import com.example.Individual_Project.models.Position.Position;
+import com.example.Individual_Project.models.Medicine.Treatment;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-@Table(name = "worker")
-public class Worker {
+@Table(name = "patient")
+public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
@@ -21,9 +22,8 @@ public class Worker {
     @JoinColumn(name = "oms_id")
     private OMS oms;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name = "position_id")
-    private Position position;
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    private Collection<Treatment> treatments;
 
     public Long getId() {
         return id;
@@ -49,20 +49,19 @@ public class Worker {
         this.oms = oms;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public Worker(Passport passport, OMS oms, Position position) {
+    public Patient(Passport passport, OMS oms) {
         this.passport = passport;
         this.oms = oms;
-        this.position = position;
     }
 
-    public Worker() {
+    public Patient() {
+    }
+
+    public Collection<Treatment> getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(Collection<Treatment> treatments) {
+        this.treatments = treatments;
     }
 }

@@ -1,11 +1,9 @@
 package com.example.Individual_Project.models.Documents;
 
-import com.example.Individual_Project.models.Peoples.Worker;
-import org.hibernate.validator.constraints.Length;
+import com.example.Individual_Project.models.People.Worker;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 
 @Entity
 @Table(name = "oms")
@@ -18,7 +16,7 @@ public class OMS {
             message = "Номер ОМС должен содержать 16 цифр")
     private String oms_num;
 
-    private Date expire_date;
+    private String expire_date;
 
     @OneToOne(optional = false, mappedBy = "oms")
     private Worker owner;
@@ -39,15 +37,15 @@ public class OMS {
         this.oms_num = oms_num;
     }
 
-    public Date getExpire_date() {
+    public String getExpire_date() {
         return expire_date;
     }
 
-    public void setExpire_date(Date expire_date) {
+    public void setExpire_date(String expire_date) {
         this.expire_date = expire_date;
     }
 
-    public OMS(String oms_num, Date expire_date) {
+    public OMS(String oms_num, String expire_date) {
         this.oms_num = oms_num;
         this.expire_date = expire_date;
     }
