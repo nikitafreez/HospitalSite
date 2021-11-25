@@ -1,4 +1,4 @@
-package com.example.Individual_Project.models.authModels;
+package com.example.Individual_Project.models.AuthModels;
 
 import javax.persistence.*;
 import java.util.Set;

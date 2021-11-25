@@ -1,8 +1,8 @@
 package com.example.Individual_Project.controllers;
 
 import com.example.Individual_Project.Repo.UserRepository;
-import com.example.Individual_Project.models.authModels.Role;
-import com.example.Individual_Project.models.authModels.User;
+import com.example.Individual_Project.models.AuthModels.Role;
+import com.example.Individual_Project.models.AuthModels.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collection;
 import java.util.Collections;
 
 @Controller
