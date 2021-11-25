@@ -1,5 +1,6 @@
 package com.example.Individual_Project.models.People;
 
+import com.example.Individual_Project.models.Ambulance.Ambulance_car;
 import com.example.Individual_Project.models.Documents.OMS;
 import com.example.Individual_Project.models.Documents.Passport;
 import com.example.Individual_Project.models.Position.Position;
@@ -24,6 +25,9 @@ public class Worker {
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "position_id")
     private Position position;
+
+    @OneToOne(optional = false, mappedBy = "worker")
+    private Ambulance_car owner;
 
     public Long getId() {
         return id;
