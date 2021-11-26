@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Сотрудники</h2>
+
+<form action="/worker/add" method="post" th:object="${worker}">
+    <select name="passport">
+        <div th:each="el : ${passports}">
+            <option th:text="${el.passSeria} + ' ' + ${el.passNum}"></option>
+        </div>
+    </select>
+    <br>
+    <select name="oms">
+        <div th:each="el : ${oms}">
+            <option th:text="${el.omsNum}"></option>
+        </div>
+    </select>
+    <br>
+    <select name="position">
+        <div th:each="el : ${positions}">
+            <option th:text="${el.positionName}"></option>
+        </div>
+    </select>
+    <br>
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>ДОЛЖНОСТЬ</th>
+        <th>ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${workers}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td>
+                <a th:href="'/worker/' + ${el.id}" th:text="${el.passport.secondName} + ' ' + ${el.passport.firstName}"
+                   style="text-decoration: none"></a>
+            </td>
+            <td th:text="${el.position.positionName}"></td>
+            <td><a th:href="'/worker/' + ${el.id} + '/remove'">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

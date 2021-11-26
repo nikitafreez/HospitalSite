@@ -1,14 +1,10 @@
 package com.example.Individual_Project.controllers;
 
-import com.example.Individual_Project.Repo.DocumentsRepo.OMSRepository;
-import com.example.Individual_Project.Repo.DocumentsRepo.PassportRepository;
-import com.example.Individual_Project.Repo.UserRepository;
-import com.example.Individual_Project.models.AuthModels.Role;
-import com.example.Individual_Project.models.AuthModels.User;
+import com.example.Individual_Project.Repo.Documents.OMSRepository;
+import com.example.Individual_Project.Repo.Documents.PassportRepository;
 import com.example.Individual_Project.models.Documents.OMS;
 import com.example.Individual_Project.models.Documents.Passport;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.Collections;
 import java.util.List;
 
 @Controller

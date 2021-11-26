@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface PositionRepository extends CrudRepository<Position, Long> {
     List<Position> findByPositionName(String positionName);
+    Position findPositionByPositionName(String positionName);
 }

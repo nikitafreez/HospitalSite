@@ -1,10 +1,6 @@
 package com.example.Individual_Project.controllers;
 
-import com.example.Individual_Project.Repo.DocumentsRepo.OMSRepository;
-import com.example.Individual_Project.Repo.DocumentsRepo.PassportRepository;
 import com.example.Individual_Project.Repo.Position.PositionRepository;
-import com.example.Individual_Project.models.Documents.OMS;
-import com.example.Individual_Project.models.Documents.Passport;
 import com.example.Individual_Project.models.Position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
