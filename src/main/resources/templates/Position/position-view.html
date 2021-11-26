@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Должности</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Должности</h2>
+
+<form action="/position/add" method="post" th:object="${position}">
+    <input name="positionName" th:field="*{positionName}" placeholder="Название должности" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('positionName')}" th:errors="*{positionName}" class="alert alert-danger"></div>
+
+    <input name="positionSalary" th:field="*{positionSalary}" placeholder="З/П должности" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('positionSalary')}" th:errors="*{positionSalary}" class="alert alert-danger"></div>
+
+    <div th:if="${#fields.hasErrors('global')}">
+        <small th:each="err : ${#fields.errors('global')}" th:text="${err}" class="alert alert-warning"></small>
+    </div>
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>ДОЛЖНОСТЬ</th>
+        <th>ЗАРПЛАТА</th>
+        <th>ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${positions}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.positionName}"></td>
+            <td th:text="${el.positionSalary}"></td>
+            <td><a th:href="'/position/' + ${el.id} + '/remove'">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

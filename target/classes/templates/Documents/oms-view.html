@@ -10,7 +10,7 @@
 <h2>ОМС</h2>
 
 <form action="/oms/add" method="post" th:object="${OMS}">
-    <input name="omsNum" th:field="*{omsNum}" placeholder="Номер полюса" type="text"
+    <input name="omsNum" th:field="*{omsNum}" placeholder="Номер полиса" type="text"
            style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
     <div th:if="${#fields.hasErrors('omsNum')}" th:errors="*{omsNum}" class="alert alert-danger"></div>
 

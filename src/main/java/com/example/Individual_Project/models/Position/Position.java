@@ -19,7 +19,7 @@ public class Position {
     @NotEmpty(message = "Название должности не должно быть пустым")
     private String positionName;
 
-    @Min(value = 12000)
+    @Min(value = 12000, message = "Зарплата должна быть выше 12 тыс. рублей")
     private Float positionSalary;
 
     @OneToMany(mappedBy = "position", fetch = FetchType.EAGER)
