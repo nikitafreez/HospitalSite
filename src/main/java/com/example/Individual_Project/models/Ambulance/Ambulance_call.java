@@ -15,22 +15,25 @@ public class Ambulance_call {
     @NotNull(message = "Адрес вызова не может быть пустым")
     @NotEmpty(message = "Адрес вызова не может быть пустым")
     @Size(min = 1, max = 100, message = "Адрес вызова должен содержать от 5 до 100 символов")
-    private String call_address;
+    private String callAddress;
 
-    private String call_date;
+    private String callDate;
 
     @Size(max = 150, message = "Описание вызова должно содержать до 150 символов")
-    private String call_description;
+    private String callDescription;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "ambulance_car_id")
     private Ambulance_car ambulance_car;
 
-    public Ambulance_call(String call_address, String call_date, String call_description, Ambulance_car ambulance_car) {
-        this.call_address = call_address;
-        this.call_date = call_date;
-        this.call_description = call_description;
+    public Ambulance_call(String callAddress, String callDate, String callDescription, Ambulance_car ambulance_car) {
+        this.callAddress = callAddress;
+        this.callDate = callDate;
+        this.callDescription = callDescription;
         this.ambulance_car = ambulance_car;
+    }
+
+    public Ambulance_call() {
     }
 
     public Long getId() {
@@ -41,35 +44,35 @@ public class Ambulance_call {
         this.id = id;
     }
 
-    public String getCall_address() {
-        return call_address;
+    public String getCallAddress() {
+        return callAddress;
     }
 
-    public void setCall_address(String call_address) {
-        this.call_address = call_address;
+    public void setCallAddress(String callAddress) {
+        this.callAddress = callAddress;
     }
 
-    public String getCall_date() {
-        return call_date;
+    public String getCallDate() {
+        return callDate;
     }
 
-    public void setCall_date(String call_date) {
-        this.call_date = call_date;
+    public void setCallDate(String callDate) {
+        this.callDate = callDate;
     }
 
-    public String getCall_description() {
-        return call_description;
+    public String getCallDescription() {
+        return callDescription;
     }
 
-    public void setCall_description(String call_description) {
-        this.call_description = call_description;
+    public void setCallDescription(String callDescription) {
+        this.callDescription = callDescription;
     }
 
     public Ambulance_car getAmbulance_car() {
         return ambulance_car;
     }
 
-    public void setAmbulance_car(Ambulance_car ambulance_car) {
-        this.ambulance_car = ambulance_car;
+    public void setAmbulance_car(Ambulance_car ambulanceCar) {
+        this.ambulance_car = ambulanceCar;
     }
 }

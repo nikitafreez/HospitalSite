@@ -5,9 +5,10 @@
     <title>Главная</title>
 </head>
 <body>
+<div th:insert="/fragments/header-footer :: header"></div>
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
+    <button type="submit" class="btn btn-danger">Выйти</button>
 </form>
-
+<div th:insert="/fragments/header-footer :: footer"></div>
 </body>
 </html>

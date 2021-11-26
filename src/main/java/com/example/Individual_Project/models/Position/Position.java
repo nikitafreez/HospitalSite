@@ -17,17 +17,17 @@ public class Position {
 
     @NotNull(message = "Название должности не должно быть пустым")
     @NotEmpty(message = "Название должности не должно быть пустым")
-    private String position_name;
+    private String positionName;
 
     @Min(value = 12000)
-    private Float position_salary;
+    private Float positionSalary;
 
     @OneToMany(mappedBy = "position", fetch = FetchType.EAGER)
     private Collection<Worker> workers;
 
     public Position(String position_name, Float position_salary) {
-        this.position_name = position_name;
-        this.position_salary = position_salary;
+        this.positionName = position_name;
+        this.positionSalary = position_salary;
     }
 
     public Position() {
@@ -41,20 +41,20 @@ public class Position {
         this.id = id;
     }
 
-    public String getPosition_name() {
-        return position_name;
+    public String getPositionName() {
+        return positionName;
     }
 
-    public void setPosition_name(String position_name) {
-        this.position_name = position_name;
+    public void setPositionName(String position_name) {
+        this.positionName = position_name;
     }
 
-    public Float getPosition_salary() {
-        return position_salary;
+    public Float getPositionSalary() {
+        return positionSalary;
     }
 
-    public void setPosition_salary(Float position_salary) {
-        this.position_salary = position_salary;
+    public void setPositionSalary(Float position_salary) {
+        this.positionSalary = position_salary;
     }
 
     public Collection<Worker> getWorkers() {

@@ -5,18 +5,29 @@
     <title>Авторизация</title>
 </head>
 <body>
-<div th:if="${param.error}">
-    Invalid username and password.
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<div class="card text-center" style="margin: 100px 40%">
+    <div th:if="${param.error}" class="alert alert-danger">
+        Неверный логин или пароль.
+    </div>
+    <div th:if="${param.logout}" class="alert alert-secondary">
+        Вы вышли из аккаунта.
+    </div>
+    <form th:action="@{/login}" method="post" style="margin: 0 auto; width: 200px">
+        <div><label> Логин : <input type="text" name="username"/> </label></div>
+        <div><label> Пароль: <input type="password" name="password"/> </label></div><br>
+        <div><button type="submit" class="btn btn-primary" style="color: white">
+            Войти
+        </button></div>
+
+        <div><button class="btn btn-secondary">
+            <a href="/registration" style="color: white; text-decoration: none">Зарегистрироваться</a>
+        </button></div>
+    </form>
+    <br>
+
 </div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-</form>
-<br>
-<a href="/registration">Зарегистрироваться</a>
+<div th:insert="/fragments/header-footer :: footer"></div>
 </body>
 </html>

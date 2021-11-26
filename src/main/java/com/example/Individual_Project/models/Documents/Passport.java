@@ -17,30 +17,30 @@ public class Passport {
 
     @Pattern(regexp = "\\d{6}",
             message = "Серия должна состоять из 6 цифр")
-    private Integer pass_Num;
+    private String passNum;
 
     @Pattern(regexp = "\\d{4}",
             message = "Номер должен состоять из 4 цифр")
-    private Integer pass_Seria;
+    private String passSeria;
 
     @NotEmpty(message = "Имя не должно быть пустым")
     @NotNull(message = "Имя не должно быть пустым")
     @Size(min = 1, max = 25, message = "Имя должно содержать от 1 до 25 букв")
-    private String first_name;
+    private String firstName;
 
     @NotEmpty(message = "Фамилия не должна быть пустым")
     @NotNull(message = "Фамилия не должна быть пустым")
     @Size(min = 1, max = 25, message = "Фамилия должна содержать от 1 до 25 букв")
-    private String second_name;
+    private String secondName;
 
     @Size(max = 25, message = "Отчество должно содержать до 25 букв")
-    private String middle_name;
+    private String middleName;
 
-    private String birth_date;
+    private String birthDate;
 
     @NotEmpty(message = "Кем выдано не должно быть пустым")
     @NotNull(message = "Кем выдано не должно быть пустым")
-    private String given_by;
+    private String givenBy;
 
     @OneToOne(optional = false, mappedBy = "passport")
     private Worker owner;
@@ -53,73 +53,60 @@ public class Passport {
         this.id = id;
     }
 
-    public Integer getPass_Num() {
-        return pass_Num;
+    public String getPassNum() {
+        return passNum;
     }
 
-    public void setPass_Num(Integer pass_Num) {
-        this.pass_Num = pass_Num;
+    public void setPassNum(String passNum) {
+        this.passNum = passNum;
     }
 
-    public Integer getPass_Seria() {
-        return pass_Seria;
+    public String getPassSeria() {
+        return passSeria;
     }
 
-    public void setPass_Seria(Integer pass_Seria) {
-        this.pass_Seria = pass_Seria;
+    public void setPassSeria(String passSeria) {
+        this.passSeria = passSeria;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSecond_name() {
-        return second_name;
+    public String getSecondName() {
+        return secondName;
     }
 
-    public void setSecond_name(String second_name) {
-        this.second_name = second_name;
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
-    public String getMiddle_name() {
-        return middle_name;
+    public String getMiddleName() {
+        return middleName;
     }
 
-    public void setMiddle_name(String middle_name) {
-        this.middle_name = middle_name;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
-    public String getBirth_date() {
-        return birth_date;
+    public String getBirthDate() {
+        return birthDate;
     }
 
-    public void setBirth_date(String birth_date) {
-        this.birth_date = birth_date;
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public String getGiven_by() {
-        return given_by;
+    public String getGivenBy() {
+        return givenBy;
     }
 
-    public void setGiven_by(String given_by) {
-        this.given_by = given_by;
-    }
-
-    public Passport() {
-    }
-
-    public Passport(Integer pass_Num, Integer pass_Seria, String first_name, String second_name, String middle_name, String birth_date, String given_by) {
-        this.pass_Num = pass_Num;
-        this.pass_Seria = pass_Seria;
-        this.first_name = first_name;
-        this.second_name = second_name;
-        this.middle_name = middle_name;
-        this.birth_date = birth_date;
-        this.given_by = given_by;
+    public void setGivenBy(String givenBy) {
+        this.givenBy = givenBy;
     }
 
     public Worker getOwner() {
@@ -128,5 +115,18 @@ public class Passport {
 
     public void setOwner(Worker owner) {
         this.owner = owner;
+    }
+
+    public Passport(String passNum, String passSeria, String firstName, String secondName, String middleName, String birthDate, String givenBy) {
+        this.passNum = passNum;
+        this.passSeria = passSeria;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.middleName = middleName;
+        this.birthDate = birthDate;
+        this.givenBy = givenBy;
+    }
+
+    public Passport() {
     }
 }
