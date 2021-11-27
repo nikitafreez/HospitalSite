@@ -1,15 +1,21 @@
 package com.example.Individual_Project.controllers;
 
+import com.example.Individual_Project.Repo.Ambulance.AmbulanceCarRepository;
 import com.example.Individual_Project.Repo.Documents.OMSRepository;
 import com.example.Individual_Project.Repo.Documents.PassportRepository;
+import com.example.Individual_Project.Repo.People.WorkerRepository;
+import com.example.Individual_Project.models.Ambulance.Ambulance_car;
 import com.example.Individual_Project.models.Documents.OMS;
 import com.example.Individual_Project.models.Documents.Passport;
+import com.example.Individual_Project.models.People.Worker;
+import com.example.Individual_Project.models.Position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -73,5 +79,21 @@ public class DocumentsController {
             omsRepository.save(oms);
             return "redirect:/oms";
         }
+    }
+
+    @GetMapping("/oms/{id}/remove")
+    public String omsDelete(@PathVariable(value = "id") Long id,
+                                 Model model) {
+        OMS oms = omsRepository.findById(id).orElseThrow();
+        omsRepository.delete(oms);
+        return "redirect:/oms";
+    }
+
+    @GetMapping("/passport/{id}/remove")
+    public String passportDelete(@PathVariable(value = "id") Long id,
+                                 Model model) {
+        Passport passport = passportRepository.findById(id).orElseThrow();
+        passportRepository.delete(passport);
+        return "redirect:/passport";
     }
 }

@@ -46,7 +46,9 @@
                    style="text-decoration: none"></a>
             </td>
             <td th:text="${el.position.positionName}"></td>
-            <td><a th:href="'/worker/' + ${el.id} + '/remove'">Удалить</a></td>
+            <td><a type="submit" class="btn btn-outline-warning"
+                   th:href="'/worker/' + ${el.id} + '/remove'">Удалить</a>
+            </td>
         </tr>
     </div>
 </table>

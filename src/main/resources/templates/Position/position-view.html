@@ -36,7 +36,10 @@
             <td th:text="${el.id}"></td>
             <td th:text="${el.positionName}"></td>
             <td th:text="${el.positionSalary}"></td>
-            <td><a th:href="'/position/' + ${el.id} + '/remove'">Удалить</a></td>
+            <td>
+                <a type="submit" class="btn btn-outline-warning"
+                   th:href="'/position/' + ${el.id} + '/remove'">Удалить</a>
+            </td>
         </tr>
     </div>
 </table>

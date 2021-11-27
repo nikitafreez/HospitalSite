@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Пациенты</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Пациенты</h2>
+
+<form action="/ambulanceCar/add" method="post" th:object="${ambulance_car}">
+    <select name="passport" style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
+        <div th:each="el : ${workers}">
+            <option th:text="${el.passport.passSeria} + ' ' + ${el.passport.passNum}"></option>
+        </div>
+    </select><br>
+
+    <input name="ambulanceCarNum" th:field="*{ambulanceCarNum}" placeholder="Номер машины" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('ambulanceCarNum')}" th:errors="*{ambulanceCarNum}"
+         class="alert alert-danger"></div>
+
+    <input name="carModel" th:field="*{carModel}" placeholder="Модель машины" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('carModel')}" th:errors="*{carModel}" class="alert alert-danger"></div>
+    <br>
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>ФИО</th>
+        <th>НОМЕР АВТОМОБИЛЯ</th>
+        <th>МОДЕЛЬ АВТОМОБИЛЯ</th>
+        <th>ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${ambulanceCars}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.worker.passport.secondName} + ' ' + ${el.worker.passport.firstName} + ' ' + ${el.worker.passport.middleName}"></td>
+            <td th:text="${el.ambulanceCarNum}"></td>
+            <td th:text="${el.carModel}"></td>
+            <td>                <a type="submit" class="btn btn-outline-warning"
+                                   th:href="'/ambulanceCar/' + ${el.id} + '/remove'">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

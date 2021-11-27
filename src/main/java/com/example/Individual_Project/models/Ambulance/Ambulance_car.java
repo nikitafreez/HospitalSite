@@ -1,6 +1,8 @@
 package com.example.Individual_Project.models.Ambulance;
 
 import com.example.Individual_Project.models.People.Worker;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -20,7 +22,7 @@ public class Ambulance_car {
             message = "Введите корректный номер машины")
     @NotNull(message = "Номер автомобиля не может быть пустым")
     @NotEmpty(message = "Номер автомобиля не может быть пустым")
-    private String ambulance_carNum;
+    private String ambulanceCarNum;
 
     @NotNull(message = "Модель автомобиля не может быть пустой")
     @NotEmpty(message = "Модель автомобиля не может быть пустой")
@@ -34,8 +36,8 @@ public class Ambulance_car {
     @OneToMany(mappedBy = "ambulance_car", fetch = FetchType.EAGER)
     private Collection<Ambulance_call> ambulance_calls;
 
-    public Ambulance_car(String ambulance_carNum, String carModel, Worker worker) {
-        this.ambulance_carNum = ambulance_carNum;
+    public Ambulance_car(String ambulanceCarNum, String carModel, Worker worker) {
+        this.ambulanceCarNum = ambulanceCarNum;
         this.carModel = carModel;
         this.worker = worker;
     }
@@ -51,12 +53,12 @@ public class Ambulance_car {
         this.id = id;
     }
 
-    public String getAmbulance_carNum() {
-        return ambulance_carNum;
+    public String getAmbulanceCarNum() {
+        return ambulanceCarNum;
     }
 
-    public void setAmbulance_carNum(String ambulance_carNum) {
-        this.ambulance_carNum = ambulance_carNum;
+    public void setAmbulanceCarNum(String ambulance_carNum) {
+        this.ambulanceCarNum = ambulance_carNum;
     }
 
     public String getCarModel() {

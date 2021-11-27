@@ -10,7 +10,7 @@ import javax.validation.constraints.Pattern;
 public class OMS {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long oms_id;
 
     @Pattern(regexp = "\\d{16}",
             message = "Номер ОМС должен содержать 16 цифр")
@@ -18,7 +18,7 @@ public class OMS {
 
     private String expireDate;
 
-    @OneToOne(optional = false, mappedBy = "oms")
+    @OneToOne(mappedBy = "oms")
     private Worker owner;
 
     public OMS() {
@@ -30,11 +30,11 @@ public class OMS {
     }
 
     public Long getId() {
-        return id;
+        return oms_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.oms_id = id;
     }
 
     public String getOmsNum() {

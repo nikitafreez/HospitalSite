@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Сотрудники</h2>
+
+<form action="/ambulanceCall/add" method="post" th:object="${ambulance_call}">
+    <select name="ambulanceCarNum">
+        <div th:each="el : ${ambulanceCars}">
+            <option th:text="${el.ambulanceCarNum}"></option>
+        </div>
+    </select>
+    <br>
+    <input name="callAddress" th:field="*{callAddress}" placeholder="Адрес вызова" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('callAddress')}" th:errors="*{callAddress}"
+         class="alert alert-danger"></div>
+    <br>
+    <input name="callDate" th:field="*{callDate}" placeholder="Дата вызова" type="date"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('callDate')}" th:errors="*{callDate}" class="alert alert-danger"></div>
+    <br>
+    <input name="callDescription" th:field="*{callDescription}" placeholder="Номер машины" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('callDescription')}" th:errors="*{callDescription}"
+         class="alert alert-danger"></div>
+    <br>
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>МАШИНА</th>
+        <th>АДРЕС</th>
+        <th>ДАТА</th>
+        <th>ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${ambulanceCalls}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td>
+                <a th:href="'/ambulanceCall/' + ${el.id}" th:text="${el.ambulance_car.ambulanceCarNum}"
+                   style="text-decoration: none"></a>
+            </td>
+            <td th:text="${el.callAddress}"></td>z
+            <td th:text="${el.callDate}"></td>z
+            <td><a th:href="'/ambulanceCall/' + ${el.id} + '/remove'">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

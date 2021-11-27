@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -42,4 +43,14 @@ public class PositionController {
             return "redirect:/position";
         }
     }
+
+    @GetMapping("/position/{id}/remove")
+    public String positionDelete(@PathVariable(value = "id") Long id,
+                               Model model) {
+        Position position = positionRepository.findById(id).orElseThrow();
+        positionRepository.delete(position);
+        return "redirect:/position";
+    }
+
+
 }

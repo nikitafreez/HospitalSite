@@ -61,12 +61,20 @@ public class Worker {
         this.position = position;
     }
 
+    public Ambulance_car getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Ambulance_car owner) {
+        this.owner = owner;
+    }
+
+    public Worker() {
+    }
+
     public Worker(Passport passport, OMS oms, Position position) {
         this.passport = passport;
         this.oms = oms;
         this.position = position;
-    }
-
-    public Worker() {
     }
 }

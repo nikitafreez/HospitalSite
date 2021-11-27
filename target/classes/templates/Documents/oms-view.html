@@ -36,7 +36,8 @@
             <td th:text="${el.id}"></td>
             <td th:text="${el.omsNum}"></td>
             <td th:text="${el.expireDate}"></td>
-            <td><a th:href="'/oms/' + ${el.id} + '/remove'">Удалить</a></td>
+            <td><a type="submit" class="btn btn-outline-warning"
+                   th:href="'/oms/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>
     </div>
 </table>
