@@ -78,8 +78,16 @@ public class AmbulanceController {
         return "redirect:/ambulanceCall";
     }
 
-    @GetMapping("/ambulanceCall/{id}/remove")
+    @GetMapping("/ambulanceCar/{id}/remove")
     public String ambulanceCarDelete(@PathVariable(value = "id") Long id,
+                                     Model model) {
+        Ambulance_car ambulance_car = ambulanceCarRepository.findById(id).orElseThrow();
+        ambulanceCarRepository.delete(ambulance_car);
+        return "redirect:/ambulanceCar";
+    }
+
+    @GetMapping("/ambulanceCall/{id}/remove")
+    public String ambulanceCallDelete(@PathVariable(value = "id") Long id,
                                      Model model) {
         Ambulance_call ambulance_call = ambulanceCallRepository.findById(id).orElseThrow();
         ambulanceCallRepository.delete(ambulance_call);

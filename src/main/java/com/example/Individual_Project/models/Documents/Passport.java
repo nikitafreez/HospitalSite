@@ -42,7 +42,7 @@ public class Passport {
     @NotNull(message = "Кем выдано не должно быть пустым")
     private String givenBy;
 
-    @OneToOne(optional = false, mappedBy = "passport")
+    @OneToOne(mappedBy = "passport")
     private Worker owner;
 
     public Long getId() {

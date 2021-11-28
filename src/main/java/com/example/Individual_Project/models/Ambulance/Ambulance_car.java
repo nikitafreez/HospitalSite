@@ -29,7 +29,7 @@ public class Ambulance_car {
     @Size(min = 1, max = 20, message = "Модель автомобиля должна содержать от 1 до 20 символов")
     private String carModel;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "worker_id")
     private Worker worker;
 

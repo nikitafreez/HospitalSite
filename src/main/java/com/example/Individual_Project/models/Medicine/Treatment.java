@@ -11,20 +11,23 @@ public class Treatment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String treatment_date;
+    private String treatmentDate;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "disease_id")
     private Disease disease;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    public Treatment(String treatment_date, Disease disease, Patient patient) {
-        this.treatment_date = treatment_date;
+    public Treatment(String treatmentDate, Disease disease, Patient patient) {
+        this.treatmentDate = treatmentDate;
         this.disease = disease;
         this.patient = patient;
+    }
+
+    public Treatment() {
     }
 
     public Long getId() {
@@ -35,12 +38,12 @@ public class Treatment {
         this.id = id;
     }
 
-    public String getTreatment_date() {
-        return treatment_date;
+    public String getTreatmentDate() {
+        return treatmentDate;
     }
 
-    public void setTreatment_date(String treatment_date) {
-        this.treatment_date = treatment_date;
+    public void setTreatmentDate(String treatment_date) {
+        this.treatmentDate = treatment_date;
     }
 
     public Disease getDisease() {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Болезни</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Болезни</h2>
+
+<form action="/disease/add" method="post" th:object="${disease}">
+    <input name="diseaseName" th:field="*{diseaseName}" placeholder="Название болезни" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('diseaseName')}" th:errors="*{diseaseName}"
+         class="alert alert-danger"></div>
+    <br>
+    <input name="treatmentMethod" th:field="*{treatmentMethod}" placeholder="Метод лечения" type="text"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('treatmentMethod')}" th:errors="*{treatmentMethod}"
+         class="alert alert-danger"></div>
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>БОЛЕЗНЬ</th>
+        <th>МЕТОД ЛЕЧЕНИЯ</th>
+        <th colspan="2">ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${diseases}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.diseaseName}"></td>
+            <td th:text="${el.treatmentMethod}"></td>
+            <td><a th:href="'/disease/' + ${el.id} + '/remove'" class="btn btn-danger">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

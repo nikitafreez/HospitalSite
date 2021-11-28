@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обращения</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Обращения</h2>
+
+<form action="/treatment/add" method="post" th:object="${treatment}">
+    <select name="passport" style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
+        <div th:each="el : ${patients}">
+            <option th:text="${el.passport.passSeria} + ' ' + ${el.passport.passNum}"></option>
+        </div>
+    </select><br>
+
+    <select name="diseaseName" style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
+        <div th:each="el : ${diseases}">
+            <option th:text="${el.diseaseName}"></option>
+        </div>
+    </select><br>
+
+    <input name="treatmentDate" th:field="*{treatmentDate}" placeholder="Дата обращения" type="date"
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+    <div th:if="${#fields.hasErrors('treatmentDate')}" th:errors="*{treatmentDate}"
+         class="alert alert-danger"></div>
+
+    <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>ID</th>
+        <th>ПАЦИЕНТ</th>
+        <th>БОЛЕЗНЬ</th>
+        <th>ДАТА ОБРАЩЕНИЯ</th>
+        <th>ДЕЙСТВИЯ</th>
+    </tr>
+    <div th:each="el : ${treatments}">
+        <tr>
+            <td th:text="${el.id}"></td>
+            <td th:text="${el.patient.passport.secondName} + ' ' + ${el.patient.passport.firstName} + ' ' + ${el.patient.passport.middleName}"></td>
+            <td th:text="${el.disease.diseaseName}"></td>
+            <td th:text="${el.treatmentDate}"></td>
+            <td><a type="submit" class="btn btn-danger"
+                   th:href="'/treatment/' + ${el.id} + '/remove'">Удалить</a></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

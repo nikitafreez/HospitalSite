@@ -42,8 +42,8 @@
             <td th:text="${el.worker.passport.secondName} + ' ' + ${el.worker.passport.firstName} + ' ' + ${el.worker.passport.middleName}"></td>
             <td th:text="${el.ambulanceCarNum}"></td>
             <td th:text="${el.carModel}"></td>
-            <td>                <a type="submit" class="btn btn-outline-warning"
-                                   th:href="'/ambulanceCar/' + ${el.id} + '/remove'">Удалить</a></td>
+            <td><a type="submit" class="btn btn-danger"
+                   th:href="'/ambulanceCar/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>
     </div>
 </table>

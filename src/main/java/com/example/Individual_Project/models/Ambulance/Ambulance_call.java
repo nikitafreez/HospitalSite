@@ -22,7 +22,7 @@ public class Ambulance_call {
     @Size(max = 150, message = "Описание вызова должно содержать до 150 символов")
     private String callDescription;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "ambulance_car_id")
     private Ambulance_car ambulance_car;
 

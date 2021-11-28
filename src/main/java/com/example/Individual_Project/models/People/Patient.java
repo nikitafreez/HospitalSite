@@ -14,11 +14,11 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "passport_id")
     private Passport passport;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @OneToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "oms_id")
     private OMS oms;
 
