@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ОМС</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>ОМС</h2>
+<div th:each="el : ${oms1}">
+    <form method="post" th:object="${OMS}">
+        <input name="omsNum" th:value="${el.omsNum}" placeholder="Номер полиса" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('omsNum')}" th:errors="*{omsNum}" class="alert alert-danger"></div>
+
+        <input name="expireDate" th:value="${el.expireDate}" placeholder="Годен до..." type="date"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('expireDate')}" th:errors="*{expireDate}" class="alert alert-danger"></div>
+
+        <div th:if="${#fields.hasErrors('global')}">
+            <small th:each="err : ${#fields.errors('global')}" th:text="${err}" class="alert alert-warning"></small>
+        </div>
+        <button type="submit" class="btn btn-success" style="margin-left: 10px">Изменить</button>
+    </form>
+</div>
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

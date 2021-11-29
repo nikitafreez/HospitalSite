@@ -26,20 +26,18 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+<!--        <th>ID</th>-->
         <th>ДОЛЖНОСТЬ</th>
         <th>ЗАРПЛАТА</th>
-        <th>ДЕЙСТВИЯ</th>
+        <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${positions}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td th:text="${el.positionName}"></td>
             <td th:text="${el.positionSalary}"></td>
-            <td>
-                <a type="submit" class="btn btn-danger"
-                   th:href="'/position/' + ${el.id} + '/remove'">Удалить</a>
-            </td>
+            <td><a type="submit" class="btn btn-warning" th:href="'/position/' + ${el.id} + '/edit'">Изменить</a></td>
+            <td><a type="submit" class="btn btn-danger" th:href="'/position/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>
     </div>
 </table>

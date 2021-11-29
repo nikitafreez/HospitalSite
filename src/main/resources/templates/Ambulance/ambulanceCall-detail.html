@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вызов</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Вызов</h2>
+
+<table class="table table-striped">
+    <tr>
+<!--        <th>ID</th>-->
+        <th>МАШИНА</th>
+        <th>АДРЕС</th>
+        <th>ДАТА</th>
+        <th>ОПИСАНИЕ ВЫЗОВА</th>
+    </tr>
+    <div th:each="el : ${ambulanceCall}">
+        <tr>
+<!--            <td th:text="${el.id}"></td>-->
+            <td  th:text="${el.ambulance_car.ambulanceCarNum}"></td>
+            <td th:text="${el.callAddress}"></td>
+            <td th:text="${el.callDate}"></td>
+            <td th:text="${el.callDescription}"></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

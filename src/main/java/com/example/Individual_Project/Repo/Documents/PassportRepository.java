@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface PassportRepository extends CrudRepository<Passport, Long> {
     List<Passport> findByPassNumAndPassSeria(String passNum, String passSeria);
+    List<Passport> findBySecondName(String secondName);
     Passport findByPassSeriaAndPassNum(String passSeria, String passNum);
 }

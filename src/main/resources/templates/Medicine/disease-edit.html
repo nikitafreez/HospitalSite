@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование болезни</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Редактирование болезни</h2>
+<div th:each="el : ${diseases}">
+    <form method="post" th:object="${disease}">
+        <input name="diseaseName" th:value="${el.diseaseName}" placeholder="Название болезни" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
+        <div th:if="${#fields.hasErrors('diseaseName')}" th:errors="*{diseaseName}"
+             class="alert alert-danger"></div>
+        <br>
+        <input name="treatmentMethod" th:value="${el.treatmentMethod}" placeholder="Метод лечения" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
+        <div th:if="${#fields.hasErrors('treatmentMethod')}" th:errors="*{treatmentMethod}"
+             class="alert alert-danger"></div>
+        <br>
+        <button type="submit" class="btn btn-success" style="margin-left: 10px">Изменить</button>
+    </form>
+</div>
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

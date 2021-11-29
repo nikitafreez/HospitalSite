@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Паспорт</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Паспорт</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>ФИО</th>
+        <th>ДАТА РОЖДЕНИЯ</th>
+        <th>СЕРИЯ И НОМЕР</th>
+        <th>КЕМ ВЫДАН</th>
+
+    </tr>
+    <div th:each="el : ${passport}">
+        <tr>
+            <td th:text="${el.secondName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"></td>
+            <td th:text="${el.birthDate}"></td>
+            <td th:text="${el.passSeria} + ' ' + ${el.passNum}"></td>
+            <td th:text="${el.givenBy}"></td>
+        </tr>
+    </div>
+</table>
+
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

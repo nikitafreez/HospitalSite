@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Сотрудники</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Сотрудники</h2>
+<div th:each="els : ${workers}">
+    <form method="post" th:object="${worker}">
+        <select name="passport">
+            <div th:each="el : ${passports}">
+                <option th:text="${el.passSeria} + ' ' + ${el.passNum}"></option>
+            </div>
+        </select>
+        <br>
+        <select name="oms">
+            <div th:each="el : ${oms}">
+                <option th:text="${el.omsNum}"></option>
+            </div>
+        </select>
+        <br>
+        <select name="position">
+            <div th:each="el : ${positions}">
+                <option th:text="${el.positionName}"></option>
+            </div>
+        </select>
+        <br>
+        <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
+    </form>
+</div>
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>

@@ -2,12 +2,12 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Пациенты</title>
+    <title>Машины скорой помощи</title>
 </head>
 <body>
 <div th:insert="/fragments/header-footer :: header"></div>
 
-<h2>Пациенты</h2>
+<h2>Машины скорой помощи</h2>
 
 <form action="/ambulanceCar/add" method="post" th:object="${ambulance_car}">
     <select name="passport" style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
@@ -30,18 +30,20 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
-        <th>ФИО</th>
+<!--        <th>ID</th>-->
+        <th>ФИО ВОДИТЕЛЯ</th>
         <th>НОМЕР АВТОМОБИЛЯ</th>
         <th>МОДЕЛЬ АВТОМОБИЛЯ</th>
-        <th>ДЕЙСТВИЯ</th>
+        <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${ambulanceCars}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td th:text="${el.worker.passport.secondName} + ' ' + ${el.worker.passport.firstName} + ' ' + ${el.worker.passport.middleName}"></td>
             <td th:text="${el.ambulanceCarNum}"></td>
             <td th:text="${el.carModel}"></td>
+            <td><a type="submit" class="btn btn-warning"
+                   th:href="'/ambulanceCar/' + ${el.id} + '/edit'">Удалить</a></td>
             <td><a type="submit" class="btn btn-danger"
                    th:href="'/ambulanceCar/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>

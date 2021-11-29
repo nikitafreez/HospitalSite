@@ -14,6 +14,7 @@ import com.example.Individual_Project.models.Medicine.Disease;
 import com.example.Individual_Project.models.Medicine.Treatment;
 import com.example.Individual_Project.models.People.Patient;
 import com.example.Individual_Project.models.People.Worker;
+import com.example.Individual_Project.models.Position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class MedicineController {
@@ -98,5 +101,34 @@ public class MedicineController {
         Treatment treatment = treatmentRepository.findById(id).orElseThrow();
         treatmentRepository.delete(treatment);
         return "redirect:/treatment";
+    }
+
+    @GetMapping("/disease/{id}/edit")
+    public String diseaseEdit(@PathVariable(value = "id") Long id,
+                               Disease disease, Model model) {
+        if (!diseaseRepository.existsById(id))
+            return "redirect:/treatment";
+        Optional<Disease> diseases = diseaseRepository.findById(id);
+        ArrayList<Disease> res = new ArrayList<>();
+        diseases.ifPresent(res::add);
+        model.addAttribute("diseases", res);
+        return "/Medicine/disease-edit";
+    }
+
+    @PostMapping("/disease/{id}/edit")
+    public String diseaseUpdate(@PathVariable(value = "id") Long id,
+                                 @Valid Disease disease,
+                                 BindingResult bindingResult,
+                                 Model model) {
+        if (bindingResult.hasErrors()) {
+            Optional<Disease> diseaseOptional = diseaseRepository.findById(id);
+            ArrayList<Disease> res = new ArrayList<>();
+            diseaseOptional.ifPresent(res::add);
+            model.addAttribute("diseaseOptional", res);
+            return "/Medicine/disease-edit";
+        } else {
+            diseaseRepository.save(disease);
+            return "redirect:/disease";
+        }
     }
 }

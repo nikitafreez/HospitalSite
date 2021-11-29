@@ -26,16 +26,18 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+<!--        <th>ID</th>-->
         <th>НОМЕР</th>
         <th>ДЕЙСТВИТЕЛЕН ДО</th>
-        <th>ДЕЙСТВИЯ</th>
+        <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${oms}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td th:text="${el.omsNum}"></td>
             <td th:text="${el.expireDate}"></td>
+            <td><a type="submit" class="btn btn-warning"
+                   th:href="'/oms/' + ${el.id} + '/edit'">Изменить</a></td>
             <td><a type="submit" class="btn btn-danger"
                    th:href="'/oms/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>

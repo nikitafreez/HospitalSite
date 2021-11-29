@@ -6,6 +6,7 @@ import com.example.Individual_Project.Repo.Documents.PassportRepository;
 import com.example.Individual_Project.Repo.People.WorkerRepository;
 import com.example.Individual_Project.models.Ambulance.Ambulance_call;
 import com.example.Individual_Project.models.Ambulance.Ambulance_car;
+import com.example.Individual_Project.models.Documents.Passport;
 import com.example.Individual_Project.models.People.Worker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Controller
 public class AmbulanceController {
@@ -92,5 +95,16 @@ public class AmbulanceController {
         Ambulance_call ambulance_call = ambulanceCallRepository.findById(id).orElseThrow();
         ambulanceCallRepository.delete(ambulance_call);
         return "redirect:/ambulanceCall";
+    }
+
+    @GetMapping("/ambulanceCall/{id}")
+    public String ambulanceCallDetail(@PathVariable(value = "id") Long id,
+                                      Model model){
+        Optional<Ambulance_call> ambulanceCall = ambulanceCallRepository.findById(id);
+        ArrayList<Ambulance_call> res = new ArrayList<>();
+        ambulanceCall.ifPresent(res::add);
+        model.addAttribute("ambulanceCall", res);
+
+        return "Ambulance/ambulanceCall-detail";
     }
 }

@@ -32,18 +32,19 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+<!--        <th>ID</th>-->
         <th>ПАЦИЕНТ</th>
         <th>БОЛЕЗНЬ</th>
         <th>ДАТА ОБРАЩЕНИЯ</th>
-        <th>ДЕЙСТВИЯ</th>
+        <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${treatments}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td th:text="${el.patient.passport.secondName} + ' ' + ${el.patient.passport.firstName} + ' ' + ${el.patient.passport.middleName}"></td>
             <td th:text="${el.disease.diseaseName}"></td>
             <td th:text="${el.treatmentDate}"></td>
+<!--            <td><a type="submit" class="btn btn-warning" th:href="'/treatment/' + ${el.id} + '/edit'">Изменить</a></td>-->
             <td><a type="submit" class="btn btn-danger"
                    th:href="'/treatment/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>

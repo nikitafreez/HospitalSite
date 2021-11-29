@@ -9,6 +9,40 @@
 <form th:action="@{/logout}" method="post">
     <button type="submit" class="btn btn-danger">Выйти</button>
 </form>
+
+<h4>Поиск в таблице "Паспорта" (Containing)</h4>
+<form method="post" action="/passport/result">
+    <input type="text" name="secondName" placeholder="Поиск по фамилии">
+    <button type="submit">Найти</button>
+    <table class="table table-striped">
+        <div th:each="el : ${result2}">
+            <tr>
+                <td th:text="'ID: ' + ${el.id}"></td>
+                <td th:text="'ФИО: ' + ${el.secondName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"></td>
+                <td th:text="'Дата рождения: ' + ${el.birthDate}"></td>
+                <td><a th:href="'/passport/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a></td>
+                <td><a type="submit" class="btn btn-danger" th:href="'/passport/' + ${el.id} + '/remove'">Удалить</a></td>
+            </tr>
+        </div>
+    </table>
+</form>
+
+<h4>Поиск в таблице "Должности" (Полное соответствие)</h4>
+<form method="post" action="/position/result">
+    <input type="text" name="positionName" placeholder="Поиск по должности">
+    <button type="submit">Найти</button>
+    <table class="table table-striped">
+        <div th:each="el : ${result3}">
+            <tr>
+                <td th:text="'ID: ' + ${el.id}"></td>
+                <td th:text="'ДОЛЖНОСТЬ: ' + ${el.positionName}"></td>
+                <td th:text="'ЗАРПЛАТА: ' + ${el.positionSalary}"></td>
+                <td><a th:href="'/position/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a></td>
+                <td><a class="btn btn-danger" th:href="'/position/' + ${el.id} + '/remove'">Удалить</a></td>
+            </tr>
+        </div>
+    </table>
+</form>
 <div th:insert="/fragments/header-footer :: footer"></div>
 </body>
 </html>

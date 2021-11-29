@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class DocumentsController {
@@ -54,6 +56,14 @@ public class DocumentsController {
             passportRepository.save(passport);
             return "redirect:/passport";
         }
+    }
+
+
+    @PostMapping("/passport/result")
+    public String passportSearch(@RequestParam String secondName, Model model) {
+        List<Passport> result2 = passportRepository.findBySecondName(secondName);
+        model.addAttribute("result2", result2);
+        return "main-view";
     }
 
     @GetMapping("/oms")
@@ -95,5 +105,74 @@ public class DocumentsController {
         Passport passport = passportRepository.findById(id).orElseThrow();
         passportRepository.delete(passport);
         return "redirect:/passport";
+    }
+
+    @GetMapping("/passport/{id}")
+    public String passportDetail(@PathVariable(value = "id") Long id,
+                                 Model model){
+        Optional<Passport> passport = passportRepository.findById(id);
+        ArrayList<Passport> res = new ArrayList<>();
+        passport.ifPresent(res::add);
+        model.addAttribute("passport", res);
+
+        return "Documents/passports-detail";
+    }
+
+    @GetMapping("/oms/{id}/edit")
+    public String omsEdit(@PathVariable(value = "id") Long id,
+                               OMS oms, Model model) {
+        if (!omsRepository.existsById(id))
+            return "redirect:/oms";
+        Optional<OMS> oms1 = omsRepository.findById(id);
+        ArrayList<OMS> res = new ArrayList<>();
+        oms1.ifPresent(res::add);
+        model.addAttribute("oms1", res);
+        return "/Documents/oms-edit";
+    }
+
+    @PostMapping("/oms/{id}/edit")
+    public String omsUpdate(@PathVariable(value = "id") Long id,
+                                 @Valid OMS oms,
+                                 BindingResult bindingResult,
+                                 Model model) {
+        if (bindingResult.hasErrors()) {
+            Optional<OMS> omsOptional = omsRepository.findById(id);
+            ArrayList<OMS> res = new ArrayList<>();
+            omsOptional.ifPresent(res::add);
+            model.addAttribute("omsOptional", res);
+            return "/Documents/oms-edit";
+        } else {
+            omsRepository.save(oms);
+            return "redirect:/oms";
+        }
+    }
+
+    @GetMapping("/passport/{id}/edit")
+    public String passportEdit(@PathVariable(value = "id") Long id,
+                               Passport passport, Model model) {
+        if (!passportRepository.existsById(id))
+            return "redirect:/passport";
+        Optional<Passport> passports = passportRepository.findById(id);
+        ArrayList<Passport> res = new ArrayList<>();
+        passports.ifPresent(res::add);
+        model.addAttribute("passports", res);
+        return "/Documents/passports-edit";
+    }
+
+    @PostMapping("/passport/{id}/edit")
+    public String positionUpdate(@PathVariable(value = "id") Long id,
+                                 @Valid Passport passport,
+                                 BindingResult bindingResult,
+                                 Model model) {
+        if (bindingResult.hasErrors()) {
+            Optional<Passport> passportOptional = passportRepository.findById(id);
+            ArrayList<Passport> res = new ArrayList<>();
+            passportOptional.ifPresent(res::add);
+            model.addAttribute("passportOptional", res);
+            return "/Documents/passports-edit";
+        } else {
+            passportRepository.save(passport);
+            return "redirect:/passport";
+        }
     }
 }

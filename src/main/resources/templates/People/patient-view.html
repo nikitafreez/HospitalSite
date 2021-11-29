@@ -27,21 +27,19 @@
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+        <!--        <th>ID</th>-->
         <th>ФИО</th>
         <th>№ ОМС</th>
-        <th>ДЕЙСТВИЯ</th>
+        <th colspan="1">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${patients}">
         <tr>
-            <td th:text="${el.id}"></td>
-            <td>
-                <a th:href="'/patient/' + ${el.id}" th:text="${el.passport.secondName} + ' ' + ${el.passport.firstName}"
-                   style="text-decoration: none"></a>
-            </td>
+            <!--            <td th:text="${el.id}"></td>-->
+            <td th:text="${el.passport.secondName} + ' ' + ${el.passport.firstName}"></td>
             <td th:text="${el.oms.omsNum}"></td>
+<!--            <td><a type="submit" class="btn btn-warning" th:href="'/patient/' + ${el.id} + '/edit'">Изменить</a></td>-->
             <td><a type="submit" class="btn btn-danger"
-                   th:href="'/patient/' + ${el.id} + '/remove'" >Удалить</a></td>
+                   th:href="'/patient/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>
     </div>
 </table>

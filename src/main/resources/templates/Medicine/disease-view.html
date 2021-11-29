@@ -11,29 +11,31 @@
 
 <form action="/disease/add" method="post" th:object="${disease}">
     <input name="diseaseName" th:field="*{diseaseName}" placeholder="Название болезни" type="text"
-           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
     <div th:if="${#fields.hasErrors('diseaseName')}" th:errors="*{diseaseName}"
          class="alert alert-danger"></div>
     <br>
     <input name="treatmentMethod" th:field="*{treatmentMethod}" placeholder="Метод лечения" type="text"
-           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+           style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;">
     <div th:if="${#fields.hasErrors('treatmentMethod')}" th:errors="*{treatmentMethod}"
          class="alert alert-danger"></div>
+    <br>
     <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
 </form>
 
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+<!--        <th>ID</th>-->
         <th>БОЛЕЗНЬ</th>
         <th>МЕТОД ЛЕЧЕНИЯ</th>
         <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${diseases}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td th:text="${el.diseaseName}"></td>
             <td th:text="${el.treatmentMethod}"></td>
+            <td><a th:href="'/disease/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a></td>
             <td><a th:href="'/disease/' + ${el.id} + '/remove'" class="btn btn-danger">Удалить</a></td>
         </tr>
     </div>

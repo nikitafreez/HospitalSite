@@ -43,21 +43,40 @@
     <button type="submit" class="btn btn-success" style="margin-left: 10px">Добавить</button>
 </form>
 
+
+
+<!--<p>Поиск</p>-->
+<!--<form method="post" action="/passport/result">-->
+<!--    <input type="text" name="secondNamee" placeholder="Поиск по фамилии">-->
+<!--    <button type="submit">Найти</button>-->
+<!--    <table class="table table-striped">-->
+<!--        <div th:each="el : ${result2}">-->
+<!--            <tr>-->
+<!--                <td th:text="'ID: ' + ${el.id}"></td>-->
+<!--                <td th:text="'ФИО: ' + ${el.secondName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"></td>-->
+<!--                <td th:text="'Дата рождения: ' + ${el.birthDate}"></td>-->
+<!--                <td><a th:href="'/passport/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a></td>-->
+<!--                <td><a type="submit" class="btn btn-danger" th:href="'/passport/' + ${el.id} + '/remove'">Удалить</a></td>-->
+<!--            </tr>-->
+<!--        </div>-->
+<!--    </table>-->
+<!--</form>-->
+
 <table class="table table-striped">
     <tr>
-        <th>ID</th>
+<!--        <th>ID</th>-->
         <th>ФИО</th>
         <th>ДАТА РОЖДЕНИЯ</th>
         <th colspan="2">ДЕЙСТВИЯ</th>
     </tr>
     <div th:each="el : ${passports}">
         <tr>
-            <td th:text="${el.id}"></td>
+<!--            <td th:text="${el.id}"></td>-->
             <td><a th:href="'/passport/' + ${el.id}"
                    th:text="${el.secondName} + ' ' + ${el.firstName} + ' ' + ${el.middleName}"
                    style="text-decoration: none;"></a></td>
-            <td th:text="${el.birthDate}"></td>
-            <td><a th:href="'/passport/' + ${el.id} + '/edit'">Изменить</a></td>
+            <td th:text="${el.birthDate}" ></td>
+            <td><a th:href="'/passport/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a></td>
             <td><a type="submit" class="btn btn-danger"
                    th:href="'/passport/' + ${el.id} + '/remove'">Удалить</a></td>
         </tr>

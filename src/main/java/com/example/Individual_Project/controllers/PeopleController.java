@@ -13,10 +13,16 @@ import com.example.Individual_Project.models.Position.Position;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PeopleController {
@@ -79,7 +85,7 @@ public class PeopleController {
 
     @GetMapping("/patient/{id}/remove")
     public String patientDelete(@PathVariable(value = "id") Long id,
-                                 Model model) {
+                                Model model) {
         Patient patient = patientRepository.findById(id).orElseThrow();
         patientRepository.delete(patient);
         return "redirect:/patient";
@@ -87,11 +93,52 @@ public class PeopleController {
 
     @GetMapping("/worker/{id}/remove")
     public String workerDelete(@PathVariable(value = "id") Long id,
-                                 Model model) {
+                               Model model) {
         Worker worker = workerRepository.findById(id).orElseThrow();
         workerRepository.delete(worker);
         return "redirect:/worker";
     }
 
+    @GetMapping("/worker/{id}/edit")
+    public String workerEdit(@PathVariable(value = "id") Long id,
+                             Worker worker, Model model) {
+        if (!workerRepository.existsById(id))
+            return "redirect:/worker";
 
+        Optional<Worker> workers = workerRepository.findById(id);
+        Iterable<Position> positions = positionRepository.findAll();
+        Iterable<OMS> oms = omsRepository.findAll();
+        Iterable<Passport> passports = passportRepository.findAll();
+        ArrayList<Worker> res = new ArrayList<>();
+        workers.ifPresent(res::add);
+        model.addAttribute("passports", passports);
+        model.addAttribute("oms", oms);
+        model.addAttribute("positions", positions);
+        model.addAttribute("workers", res);
+        return "/People/worker-edit";
+    }
+
+    @PostMapping("/worker/{id}/edit")
+    public String workerUpdate(@PathVariable(value = "id") Long id,
+                               @Valid Worker worker,
+                               BindingResult bindingResult,
+                               @RequestParam String position,
+                               @RequestParam String oms,
+                               @RequestParam String passport,
+                               Model model) {
+//        if (bindingResult.hasErrors()) {
+//            Optional<Worker> workerOptional = workerRepository.findById(id);
+//            ArrayList<Worker> res = new ArrayList<>();
+//            workerOptional.ifPresent(res::add);
+//            model.addAttribute("workers", res);
+//            return "/People/worker-edit";
+//        } else {
+        Position position1 = positionRepository.findPositionByPositionName(position);
+        OMS oms1 = omsRepository.findOMSByOmsNum(oms);
+        Passport passport1 = passportRepository.findByPassSeriaAndPassNum(passport.substring(0, 4), passport.substring(5, 11));
+        Worker worker1 = new Worker(passport1, oms1, position1);
+        workerRepository.save(worker1);
+        return "redirect:/worker";
+//    }
+    }
 }

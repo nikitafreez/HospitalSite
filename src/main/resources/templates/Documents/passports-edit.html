@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Паспорта</title>
+</head>
+<body>
+<div th:insert="/fragments/header-footer :: header"></div>
+
+<h2>Паспорта</h2>
+<div th:each="el : ${passports}">
+    <form method="post" th:object="${passport}">
+        <input name="firstName" th:value="${el.firstName}" placeholder="Имя" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger"></div>
+
+        <input name="secondName" th:value="${el.secondName}" placeholder="Фамилия" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" class="alert alert-danger"></div>
+
+        <input name="middleName" th:value="${el.middleName}" placeholder="Отчество" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}" class="alert alert-danger"></div>
+
+        <input name="birthDate" th:value="${el.birthDate}" placeholder="Дата рождения" type="date"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+
+        <input name="passNum" th:value="${el.passNum}" placeholder="Номер паспорта" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('passNum')}" th:errors="*{passNum}" class="alert alert-danger"></div>
+
+        <input name="passSeria" th:value="${el.passSeria}" placeholder="Серия паспорта" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('passSeria')}" th:errors="*{passSeria}" class="alert alert-danger"></div>
+
+        <input name="givenBy" th:value="${el.givenBy}" placeholder="Кем выдан" type="text"
+               style="margin-bottom: 10px; margin-left: 10px; border-radius: 5px;"><br>
+        <div th:if="${#fields.hasErrors('givenBy')}" th:errors="*{givenBy}" class="alert alert-danger"></div>
+
+        <div th:if="${#fields.hasErrors('global')}">
+            <small th:each="err : ${#fields.errors('global')}" th:text="${err}" class="alert alert-warning"></small>
+        </div>
+        <button type="submit" class="btn btn-success" style="margin-left: 10px">Изменить</button>
+    </form>
+</div>
+<div th:insert="/fragments/header-footer :: footer"></div>
+</body>
+</html>
